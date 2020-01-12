@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, viewport-fit=cover" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- to avoid the warning of content security policy -->
+<meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src * 'unsafe-inline' 'unsafe-eval'">
+
+<title>Hello World</title>
+<script>
+  // fix wp8 view port issue, see:
+  // https://github.com/floatinghotpot/cordova-admob-pro/issues/109
+  // https://coderwall.com/p/zk_2la/responsive-design-in-ie-10-on-windows-phone-8
+  // http://stackoverflow.com/questions/24007577/windows-phone-8-viewport-issue
+(function() {
+  if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+    var msViewportStyle = document.createElement("style");
+    msViewportStyle.appendChild(
+      document.createTextNode("@-ms-viewport{width:auto!important}")
+    );
+    document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+  }
+})();
+</script>
+<!-- must-have, which will be created by cordova prepare/build -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/index.css">
+
+</head>
+
+<body>
+<script>
+  var admobid = {
+    banner: 'ca-app-pub-6025387404932309/9482907425',
+    interstitial: 'ca-app-pub-6025387404932309/9357896290'
+  };
+  function bannerAd(){
+    AdMob.createBanner({
+      adId: admobid.banner,
+      position: AdMob.AD_POSITION.BOTTOM_CENTER,
+      autoShow: true
+    });
+  }
+  function interstitialAd(){
+    AdMob.prepareInterstitial({
+      adId: admobid.interstitial 
+    });
+  }
+</script>
+  <div id="apresentacao" class="apresentacao">
+    <button id="btnAp" onclick="bannerAd()">Esse app tem a finalidade de auxiliar policiais a redigirem informativo de ocorrência nos grupos de serviço no Whatsapp, por exemplo. Após preenchido formulário, é copiado para área de transferência todas as informações, bastando apenas colar onde desejado. <br><strong>Clique aqui para acessar</strong></button>
+  </div>
+
+  <div id="conteudo" class="app hidden">
+   <!-- <button onclick="bannerAd()">Clique aqui</button>
+    <button onclick="interstitialAd()">OU clique aqui para ajudar neste projeto</button>
+   --><form>
+        <h1>
+            Ocorrências
+        </h1>
+        <label>Ocorrência</label>
+        <select id="ocorrencia" onchange="getOcorrencia()">
+            <option class="ocorrencia">
+            </option>
+            <option class="ocorrencia">
+                ContraVida
+            </option>
+            <option class="ocorrencia">
+                Transito
+            </option>
+                <option class="ocorrencia">
+                Patrimônio
+            </option>
+                <option class="ocorrencia">
+                Público
+            </option>
+                <option class="ocorrencia">
+                drogas
+            </option>
+                <option class="ocorrencia">
+                mulher
+            </option>
+        </select>
+        <select id="tipo">	</select>
+
+        <br><label for="cidade">Cidade/OPM</label><br>
+        <input id="cidade" type="text" maxlength="30" required><br>
+        <label>GU</label><br>
+        <input id="gu" type="text" maxlength="30" required><br>
+        <label>Data e hora</label><br>
+        <input id="data" type="text" maxlength="20" required><br>
+        <label>Local da Ocorrência</label><br>
+        <input id="local" type="text" maxlength="50" required><br>
+        <label>Quantidade de envolvidos</label><br>
+      
+        <input type="range" id="range" name="vol" value="0" min="0" max="10" oninput="display.value=value" onchange="display.value=value"> 
+        <br><input type="text" id="display" value="0" readonly>
+        <br>
+        <input id="envolvidos" class="button" type="button" value="cadastrar envolvidos" onclick="addEnvolvidos()">
+        <div id="env"></div>
+        <label>Relato:</label><br>
+        <textarea id="relato" maxlength="500"></textarea>
+        <button id="button">Copiar</button>
+    </form>
+  </div>
+  <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-admobpro": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-admobpro@^2.49.0"
+    },
+    "is_top_level": true,
+    "variables": {
+      "PLAY_SERVICES_VERSION": "16.0.0",
+      "ADMOB_APP_ID": "ca-app-pub-6025387404932309~4263489895"
+    }
+  },
+  "cordova-plugin-extension": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-extension"
+    },
+    "is_top_level": false,
+    "variables": {}
+  }
+}
